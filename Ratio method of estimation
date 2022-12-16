@@ -1,0 +1,56 @@
+The sugarcane production and cultivation of Indian states are pre- sented in Table 2.2. Draw a random sample using SRSWOR of size 10 and estimate the average amount of sugarcane production using the ratio method of estimation and obtain the 95% confidence interval for the population mean.
+library("clipr")
+#Data
+b = read_clip_tbl("Sr. No. 	State	Cuktivated area (in lakh acres)	Prodcution (in lakh tonnes)
+1	AP	0.99	79.48
+2	AS	0.3	11.15
+3	BH	2.43	165.11
+4	CH	0.3	12.47
+5	GJ	1.84	122.34
+6	HR	1.14	87.29
+7	JH	0.07	5.23
+8	KR	3.7	299.02
+9	KER	0.01	1.22
+10	MP	0.98	54.3
+11	MH	9.02	726.37
+12	OD	0.05	3.41
+13	PU	0.93	75.33
+14	RJ	0.05	4.04
+15	TN	1.83	165.62
+16	TL	0.35	22.17
+17	UP	22.34	1623.38
+18	UT	1.02	71.42
+19	WB	0.17	12.94
+20	Others	0.19	8.68")
+x = b$Cuktivated.area..in.lakh.acres.
+y = b$Prodcution..in.lakh.tonnes.
+x
+y
+set.seed(25)
+s1=sample(1:20,10,replace = F)
+s1
+dx=x[s1]
+dx
+dy=y[s1]
+dy
+xmean=mean(x)
+mdx=mean(dx)
+xmean
+mdx
+mdy=mean(dy)
+mdy
+vdx=var(dx)
+vdy=var(dy)
+cdxdy=cov(dx,dy)
+beta=cdxdy/vdx
+y1=mdy+beta*(xmean-mdx)
+y1
+cor=cdxdy/sqrt(vdx*vdy)
+cor
+Mse=((1/10)-(1/20))*vdy*(1-cor^2)
+Mse
+t=qt(0.975,5)
+t
+LL=y1-t*sqrt(Mse)
+UL=y1+t*sqrt(Mse)
+LL;UL
